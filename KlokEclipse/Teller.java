@@ -1,40 +1,35 @@
-package les07.klokineclipse;
+package main;
 
 import processing.core.PApplet;
 
 public class Teller {
-	private int maximum, waarde;
+	private int maximum;
+	private int waarde;
 	private float x, y, breedte, hoogte;
 	private PApplet window;
-	
+
 	public Teller(int maximum, float x, float y, float breedte, float hoogte, PApplet p) {
 		this.maximum = maximum;
+		waarde = 0;
 		this.x = x;
 		this.y = y;
 		this.breedte = breedte;
 		this.hoogte = hoogte;
 		window = p;
 	}
-	
+
 	public void tik() {
 		waarde = (waarde + 1) % maximum;
 	}
-	
-	public void tekenTeller() {
-		window.rectMode(window.CENTER);
-		window.noStroke();
-		window.fill(0);
-		window.rect(x, y, breedte, hoogte);
-		
-		window.fill(255, 0, 0);
-		window.textSize(hoogte);
-		window.textAlign(window.CENTER);
-		float verschuiving = (window.textAscent() - window.textDescent()) / 2;
-		window.text(getTijdNotatie(), x, y + verschuiving);
+
+	public String geefTijdNotatie() {
+		if (waarde < 10) {
+			return "0" + waarde;
+		} else {
+			return " " + waarde;
+		}
 	}
-	
-	
-	//region - Getters & setters
+
 	public float getX() {
 		return x;
 	}
@@ -66,15 +61,6 @@ public class Teller {
 	public void setHoogte(float hoogte) {
 		this.hoogte = hoogte;
 	}
-	
-	public String getTijdNotatie() {
-		if (waarde < 10) {
-			return "0" + waarde;
-		}
-		else {
-			return "" + waarde;
-		}
-	}
 
 	public int getWaarde() {
 		return waarde;
@@ -84,5 +70,18 @@ public class Teller {
 		if (waarde >= 0 && waarde < maximum) {
 			this.waarde = waarde;
 		}
+	}
+
+	public void tekenTeller() {
+		window.rectMode(window.CENTER);
+		window.noStroke();
+		window.fill(0);
+		window.rect(x, y, breedte, hoogte);
+
+		window.fill(255, 0, 0);
+		window.textSize(hoogte);
+		window.textAlign(window.CENTER);
+		float verschuiving = (window.textAscent() - window.textDescent()) / 2;
+		window.text(geefTijdNotatie(), x, y + verschuiving);
 	}
 }
