@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 public class Scorebord {
 	private int[] scores = new int[7];
-    private ArrayList<Lottobal> ballen;
+        private ArrayList<Lottobal> ballen;
 
 	public Scorebord(ArrayList<Lottobal> ballen) {
 		this.ballen = ballen;
