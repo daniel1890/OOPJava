@@ -9,7 +9,7 @@ public class Glazenbol {
 
 	public void verzamelAlleBallen() {
 		if (ballen.size() < 1) {
-			for (int i = 1; i < Lottomachine.getTotaalaantalballen(); i++) {
+			for (int i = 1; i < Lottomachine.getTotaalaantalballen() + 1; i++) {
 				Lottobal b = new Lottobal(i);
 				ballen.add(b);
 			}
