@@ -1,23 +1,35 @@
 import java.util.ArrayList;
 
-public class Glazenbol {
-	private ArrayList<Lottobal> ballen;
+public class Lottomachine {
+	private Glazenbol bol;
+	public Scorebord bord;
+	public static final int totaalAantalBallen = 45;
+	public static final int totaalAantalBallenTrekkenPerBeurt = 6;
+	private ArrayList<Lottobal> ballen = new ArrayList<Lottobal>();
 
-	public Glazenbol(ArrayList<Lottobal> ballen) {
-		this.ballen = ballen;
+
+	public Lottomachine() {
+		bol = new Glazenbol(ballen);
+		bord = new Scorebord(ballen);
+		bol.verzamelAlleBallen();
 	}
 
-	public void verzamelAlleBallen() {
-		if (ballen.size() < 1) {
-			for (int i = 1; i < Lottomachine.getTotaalaantalballen() + 1; i++) {
-				Lottobal b = new Lottobal(i);
-				ballen.add(b);
-			}
+	public void voerTrekkingUit() {
+		bol.shuffleBallen();
+		
+		for (int i = 0; i < 6; i++) {
+			Lottobal bal = ballen.get(i);
+			bord.plaatsBal(bal, i);
 		}
+		
+		Lottobal bonusbal = ballen.get(totaalAantalBallenTrekkenPerBeurt);
+		bord.plaatsBonusBal(bonusbal, totaalAantalBallenTrekkenPerBeurt);
+		bord.sorteerBallen();
+		bord.printScoreBord();
 	}
 
-	public int schepBal() {
-		int limit = (int) (Math.random() * Lottomachine.getTotaalaantalballen());
-		return ballen.get(limit).getBalNummer();
+	public static int getTotaalaantalballen() {
+		return totaalAantalBallen;
 	}
+
 }
