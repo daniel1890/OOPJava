@@ -1,32 +1,42 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Scorebord {
-	private int[] scores = new int[7];
-        private ArrayList<Lottobal> ballen;
+	private ArrayList<Lottobal> ballen;
 
 	public Scorebord(ArrayList<Lottobal> ballen) {
 		this.ballen = ballen;
 	}
 
-	public void plaatsBal(int bal, int i) {
-		scores[i] = bal;
+	public void plaatsBal(Lottobal bal, int i) {
+		ballen.set(i, bal);
 	}
 
-	public void plaatsBonusBal(int bal, int aantalKeerTrekken) {
-		scores[aantalKeerTrekken] = bal;
+	public void plaatsBonusBal(Lottobal bonusbal, int aantalKeerTrekkenLaatsteGetal) {
+		ballen.set(aantalKeerTrekkenLaatsteGetal, bonusbal);
 	}
 
 	public void sorteerBallen() {
-		Arrays.sort(scores);
+		for (int i = Lottomachine.totaalAantalBallenTrekkenPerBeurt; i > 0; i--) {
+			for (int j = 0; j < i - 1; j++) {
+				if (ballen.get(j).getBalNummer() > ballen.get(j + 1).getBalNummer()) {
+					Lottobal bal = ballen.get(j);
+					ballen.set(j, ballen.get(j + 1));
+					ballen.set(j + 1, bal);
+				}
+			}
+		}
 	}
 
 	public void printScoreBord() {
-		sorteerBallen();
 		for (int i = 0; i < 6; i++) {
-			System.out.print(scores[i] + " ");
+			Lottobal bal = ballen.get(i);
+			System.out.print(bal.getBalNummer() + " ");
 		}
-		System.out.println("Bonusbal: " + scores[6]);
+
+		Lottobal bonusbal = ballen.get(Lottomachine.totaalAantalBallenTrekkenPerBeurt);
+		System.out.println("Bonusbal: " + bonusbal.getBalNummer());
 	}
 
 }
