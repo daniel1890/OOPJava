@@ -4,8 +4,8 @@ public class Lottomachine {
 	private Glazenbol bol;
 	public Scorebord bord;
 	public static final int totaalAantalBallen = 45;
+	public static final int totaalAantalBallenTrekkenPerBeurt = 6;
 	private ArrayList<Lottobal> ballen = new ArrayList<Lottobal>();
-
 
 
 	public Lottomachine() {
@@ -14,14 +14,18 @@ public class Lottomachine {
 		bol.verzamelAlleBallen();
 	}
 
-	public void trekBallen() {
-		int aantalKeerTrekken = 6;
-		for (int i = 1; i < 7; i++) {
-			int bal = bol.schepBal();
+	public void voerTrekkingUit() {
+		bol.shuffleBallen();
+		
+		for (int i = 0; i < 6; i++) {
+			Lottobal bal = ballen.get(i);
 			bord.plaatsBal(bal, i);
 		}
-		int bonusbal = bol.schepBal();
-		bord.plaatsBonusBal(bonusbal, aantalKeerTrekken);
+		
+		Lottobal bonusbal = ballen.get(totaalAantalBallenTrekkenPerBeurt);
+		bord.plaatsBonusBal(bonusbal, totaalAantalBallenTrekkenPerBeurt);
+		bord.sorteerBallen();
+		bord.printScoreBord();
 	}
 
 	public static int getTotaalaantalballen() {
