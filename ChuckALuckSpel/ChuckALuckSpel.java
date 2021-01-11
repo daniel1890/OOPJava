@@ -12,7 +12,7 @@ public class ChuckALuckSpel {
 	}
 
 	public void speelRonde(int geluksGetal, int inzetBeurt) {
-		while (inzetSpelerTotaal > 0) {
+		if (inzetSpelerTotaal > 0) {
 			if (geluksGetal > 0 && geluksGetal <= beker.getnOgenDobbelsteen()) {
 				huidigeRonde += 1;
 				this.geluksGetal = geluksGetal;
@@ -28,9 +28,8 @@ public class ChuckALuckSpel {
 				System.out.println("--------------------------------------");
 			}
 		}
-		while (inzetSpelerTotaal <= 0) {
+		if (inzetSpelerTotaal <= 0) {
 			System.out.println("Werp meer geld in alstublieft.");
-			break;
 		}
 	}
 
