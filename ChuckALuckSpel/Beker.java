@@ -1,12 +1,10 @@
 import java.util.ArrayList;
 
 public class Beker {
-	private int nDobbelstenen;
 	private int nOgenDobbelsteen = 6;
 	public ArrayList<Dobbelsteen> dobbelstenen = new ArrayList<Dobbelsteen>();
 
 	public Beker(int nDobbelstenen) {
-		this.nDobbelstenen = nDobbelstenen;
 		for (int i = 0; i < nDobbelstenen; i++) {
 			Dobbelsteen d = new Dobbelsteen(nOgenDobbelsteen);
 			dobbelstenen.add(d);
